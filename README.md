@@ -1,8 +1,6 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Este es un proyecto de Next.js inicializado con create-next-app.
 
-## Getting Started
-
-First, run the development server:
+Primero, ejecuta el servidor de desarrollo:
 
 ```bash
 npm run dev
@@ -14,23 +12,40 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abri http://localhost:3000 en tu navegador para ver el resultado.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Podes comenzar a editar la página modificando app/page.tsx. La página se actualizará automáticamente a medida que edites el archivo.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Este proyecto utiliza next/font para optimizar y cargar automáticamente Geist, una nueva familia tipográfica desarrollada por Vercel.
 
-## Learn More
+//CONEXION CON EL BACKEND//
 
-To learn more about Next.js, take a look at the following resources:
+Para poder ver la aplicación web funcionando con todas sus preguntas, imágenes y lógica de filiación divina en tiempo real, es obligatorio mantener levantados los dos servidores al mismo tiempo en dos terminales de PowerShell separadas.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---Levantar el Backend (Python / FastAPI)
+Esta terminal se encarga de procesar la lógica de puntuación, las reglas de los dioses y servir las rutas de las preguntas.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+#Abrir la primera terminal de PowerShell e ir a la carpeta del backend:
 
-## Deploy on Vercel
+cd C:\Users\Melan\test_demigods
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+#Ejecuta el servidor de Python:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+python -m uvicorn api:app --reload --port 8000
+
+En la terminal va a salir  un mensaje indicando que la API está corriendo en http://127.0.0.1:8000. No cierres esta terminal.
+Levantar el Frontend (Next.js / React)
+
+Esta terminal abre la interfaz visual interactiva que consume los datos de Python.
+
+#Abrí una segunda terminal de PowerShell y anda a la carpeta del frontend:
+
+cd C:\Users\Melan\demigods-test-front
+
+#Ejecuta el servidor de desarrollo de Next.js:
+
+npx next dev -H localhost
+
+La terminal va a avisar que el servidor está listo. Entra desde tu navegador web a: http://localhost:3000
+Ambos procesos tienen que estar ejecutándose en paralelo. Si cerras la terminal de Python, el frontend no va a poder cargar las preguntas ni procesar los resultados del test.
+Si realizas cambios en data.json o en el código del frontend (app/page.tsx), los vas a ver de inmediato en http://localhost:3000 al actualizar la página (F5).
